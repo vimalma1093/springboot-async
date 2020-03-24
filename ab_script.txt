@@ -1,0 +1,3 @@
+ab -n 1000 -c 10 -p /Users/vsugumaran/Documents/personal/code/springboot-async/create_user.txt -T application/json  http://localhost:8080/springboot-async/user/create
+ab -n 100 -c 10 http://localhost:8080/springboot-async/user/name/vimal
+ab -n 4000 -c 150 http://localhost:8080/springboot-async/userAsync/name/vimal
