@@ -39,14 +39,17 @@ public class UserService {
 
     @Async
     public CompletableFuture<List<UserDto>> getUserByNameAsync(String firstName){
-       // LOG.info("Getting user by name Async --> Service ");
-        List<UserDto> userDtos = new ArrayList<>();
+      // List<UserDto> userDtos = new ArrayList<>();
         CompletableFuture<List<User>> users = userRepo.findAllByLastName(firstName);
         return users.thenApply( urs -> {
-            for(User u : urs) {
+            return urs.stream().map(this::userToUserDto).collect(Collectors.toList());
+            //urs.stream().map(this::userToUserDto).forEach(userDtos::add);
+            //OR
+            /*for(User u : urs) {
                 userDtos.add(userToUserDto(u));
-            }
-            return userDtos;
+            }*/
+
+           // return userDtos;
         });
     }
 
